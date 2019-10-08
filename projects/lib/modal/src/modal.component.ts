@@ -10,10 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class ModalComponent implements OnInit {
+  public constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  public ngOnInit(): void {}
 }

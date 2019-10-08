@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { ModalService } from './modal.service';
+import { ModalService } from 'projects/lib/modal/src/modal.service';
 
 describe('ModalService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

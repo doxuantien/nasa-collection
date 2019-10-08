@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
-import { ModalComponent } from './modal.component';
-
-
+import { ModalComponent } from 'projects/lib/modal/src/modal.component';
 
 @NgModule({
   declarations: [ModalComponent],
-  imports: [
-  ],
   exports: [ModalComponent]
 })
-export class ModalModule { }
+export class ModalModule {}
