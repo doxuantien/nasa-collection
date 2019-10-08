@@ -1,0 +1,46 @@
+$dialog-width: 70%
+$dialog-zIndex: 5000
+$icon-size: 30px
+
+.fade
+  display: flex
+  align-items: center
+  justify-content: center
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: black
+  z-index: $dialog-zIndex
+  opacity: .4
+
+.dialog
+  position: absolute
+  top: 130px
+  left: 50%
+  transform: translateX(-50%)
+  z-index: $dialog-zIndex + 1
+  width: $dialog-width
+  padding: 30px
+  border-radius: 5px
+  border: 2px solid white
+  background-color: white
+  box-shadow: 3px 6px 10px 0 #1f1e1e
+
+.title
+  display: flex
+  align-items: center
+  justify-content: space-between
+  margin-bottom: 20px
+
+  .text
+    font-size: 30px
+
+  .close
+    display: inline-block
+    cursor: pointer
+    width: $icon-size
+    height: $icon-size
+    background: url('/assets/cross.svg') center / contain no-repeat
+    filter: invert(.3)
