@@ -1,0 +1,71 @@
+@import "variables"
+
+@mixin icon($width, $height, $url)
+  display: inline-block
+  width: $width
+  height: $height
+  background: url($url) center / contain no-repeat
+
+@mixin flex-center
+  display: flex
+  align-items: center
+  justify-content: center
+
+@mixin flex-1
+  .flex-1
+    flex: 1
+
+@mixin img-fluid
+  img
+    width: 100%
+    height: auto
+
+@mixin button($border: $inactive-color)
+  .button
+    border: 1px solid $border
+    border-radius: 5px
+    padding: 5px
+    cursor: pointer
+
+    &:hover
+      border-color: $border-color
+
+    &.primary
+      background-color: $primary-color
+      color: white
+
+      &:hover
+        background-color: $primary-color-hover
+
+      &:active
+        background-color: $primary-color-active
+
+@mixin middle-position
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+@mixin list-items-three-column
+  .items
+    display: flex
+    flex-wrap: wrap
+
+    .item
+      flex: 0 0 33.333333333333%
+      max-width: 33.333333333333%
+
+      app-item
+        height: 100%
+
+@mixin fade($zIndex)
+  .fade
+    display: none
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: black
+    z-index: $zIndex
+    opacity: .9

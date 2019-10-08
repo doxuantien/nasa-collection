@@ -1,0 +1,38 @@
+.form-group
+  form([formGroup]="formGroup")
+    ng-container(*ngFor="let control of controls")
+      ng-container(*ngTemplateOutlet="controlGroup; context: {id: control.id, type: control.type, label: control.label}")
+
+    ng-template(#controlGroup, let-type="type", let-id="id", let-label="label")
+      .control-group
+        label(
+          [for]="id",
+          [class.has-value]="formGroup.get(id).value",
+          [class.hidden] = "!formGroup.get(id).value",
+          [class.required]="formGroup.get(id).validator"
+        ) {{ label || id | titlecase }}
+        input(
+          *ngIf="!type",
+          type='text',
+          [id]="id",
+          [placeholder]="id | titlecase",
+          [formControlName]="id"
+        )
+        textarea(
+          *ngIf="type === 'textarea'",
+          rows='5',
+          [id]="id",
+          [placeholder]="id | titlecase",
+          [formControlName]="id"
+        )
+        select(
+          *ngIf="type === 'dropdown'",
+          [id]="id",
+          [formControlName]="id"
+        )
+          option(*ngFor="let type of mediaTypes", [value]="type") {{ type | titlecase }}
+
+.actions
+  .button.primary((click)="onClickAction()")
+    .icon-check
+    .content {{ action === 'edit' ? 'Save' : 'Add to collection' }}

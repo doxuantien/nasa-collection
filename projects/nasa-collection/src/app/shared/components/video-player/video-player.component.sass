@@ -1,0 +1,44 @@
+@import "../../../styles/variables"
+@import "../../../styles/mixins"
+
+@include fade($video-player-zIndex)
+
+$video-width: 70%
+
+.title
+  display: flex
+  align-items: center
+  justify-content: space-between
+  width: 100%
+  position: absolute
+  top: -47px
+  z-index: $video-player-zIndex + 2
+  padding: 0 15px
+
+  .text
+    font-size: 30px
+    color: $inactive-color
+
+  .close
+    @include icon(30px, 30px, '/assets/cross.svg')
+    filter: invert(1)
+    cursor: pointer
+
+.box
+  @include middle-position
+  display: none
+  height: auto
+  width: $video-width
+  border: 2px solid black
+  background: black
+  z-index: $video-player-zIndex + 1
+  overflow: visible
+
+  &::before
+    content: ''
+
+.show
+  display: block !important
+
+video
+  width: 100%

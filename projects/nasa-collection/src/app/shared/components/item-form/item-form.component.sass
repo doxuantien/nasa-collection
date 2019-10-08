@@ -1,0 +1,58 @@
+@import "../../../styles/variables"
+@import "../../../styles/mixins"
+
+@include button
+
+$font-size: 20px
+
+.hidden
+  display: none
+
+.form-group
+  display: flex
+
+  form
+    width: 100%
+
+.control-group
+  min-height: 85px
+  border: 1px solid $inactive-color
+  border-radius: 5px
+  padding: 10px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  font-size: $font-size
+  margin-bottom: 30px
+
+  input, textarea, select
+    font-size: $font-size
+
+label
+  padding-bottom: 10px
+  color: $inactive-color
+
+  &.has-value
+    font-size: 17px
+
+  &.required::after
+    content: '*'
+    color: #f70000
+    font-weight: bold
+    font-size: 25px
+    margin-left: 7px
+
+.actions
+  display: inline-block
+  font-size: $font-size
+
+  .button.primary
+    display: flex
+    align-items: center
+    padding: 10px
+    border: none
+
+  .icon-check
+    @include icon(23px, 23px, '/assets/tick.svg')
+    filter: invert(1)
+    margin-right: 10px

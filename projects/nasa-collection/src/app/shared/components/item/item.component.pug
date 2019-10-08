@@ -1,0 +1,25 @@
+.thumbnail((click)="onOpenVideo()")
+  .image
+    img(src="{{ item.thumbnail }}", title="{{ item.title }}", alt="{{ item.title }}")
+  .action(*ngIf="item.mediaType === 'video'")
+    .play
+
+.content
+  .top-content
+    .location {{ item.location || '' }}
+    .date {{ item.date | formatDate }}
+  .title {{ item.title }}
+  .description {{ item.description }}
+
+  .flex-1
+
+  ng-container(*ngIf="itemType === 0")
+    .actions
+      .button.icon.favorite([class.active]="isFavorite", (click)="onClickFavorite()")
+      .button.icon.delete((click)="onClickDelete()")
+      .button.icon.edit((click)="onClickEdit()")
+
+  ng-container(*ngIf="itemType === 1")
+    .button.add-action((click)="onAddItemToCollection()")
+      .icon-plus
+      .text Add to NASA collection

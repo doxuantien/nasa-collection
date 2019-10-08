@@ -1,0 +1,25 @@
+@import "../../styles/variables"
+@import "../../styles/mixins"
+
+.header, .content
+  padding-left: 30px
+  padding-right: 30px
+
+.header
+  margin-top: $distance-from-top
+  margin-bottom: $distance-from-top
+
+  .back
+    display: flex
+    align-items: center
+
+    .icon
+      @include icon(20px, 20px, '/assets/back.svg')
+      margin-right: 5px
+
+.content .text
+  font-size: 50px
+  padding-bottom: 40px
+
+.results
+  padding-top: 40px

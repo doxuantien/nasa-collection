@@ -1,0 +1,15 @@
+.row.header
+  .col.title
+    .text NASA Collection
+    .button.primary.action([routerLink]="'nasa-search'")
+      .icon-plus
+      .content Add new item
+
+.row
+  .items
+    .item(*ngFor="let item of items$ | async; let i = index; trackBy: trackByNasaId")
+      app-item(
+        [model]="item",
+        [itemType]="0",
+        (action)="onActionEmitted($event)"
+      )

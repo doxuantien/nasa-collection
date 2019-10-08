@@ -1,0 +1,36 @@
+@import "../../styles/mixins"
+@import "../../styles/variables"
+
+@include list-items-three-column
+@include button
+
+\:host
+  display: block
+  padding-right: 30px
+  padding-left: 30px
+
+.header
+  margin-top: $distance-from-top
+  margin-bottom: $distance-from-top
+
+.title
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+  .text
+    color: $inactive-color
+    font-size: 50px
+    font-weight: bold
+
+  .action
+    @include flex-center
+    padding: 10px
+    border: none
+
+    .icon-plus
+      @include icon(25px, 25px, '/assets/plus.svg')
+
+    .content
+      font-size: 20px
+      margin-left: 10px
