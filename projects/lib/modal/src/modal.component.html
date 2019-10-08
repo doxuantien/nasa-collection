@@ -1,0 +1,12 @@
+<div class="fade" (click)="onCloseModal()"></div>
+
+<div class="dialog">
+  <div class="title">
+    <div class="text">{{ title | titlecase }}</div>
+    <div class="close" (click)="onCloseModal()"></div>
+  </div>
+
+  <div class="body">
+    <ng-container #body></ng-container>
+  </div>
+</div>

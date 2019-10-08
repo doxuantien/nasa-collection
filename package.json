@@ -9,8 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "pack:lib": "npm-run-all pack:lib:*",
-    "pack:lib:modal": "ng build lib-modal && cd dist/lib/modal && npm pack && cp lib-modal-0.0.1.tgz ../../../projects/nasa-collection/packages",
-    "preinstall": "npm run pack:lib",
+    "pack:lib:modal": "ng build lib-modal && cd dist/lib/modal && npm pack && cp jo-modal-0.0.1.tgz ../../../projects/nasa-collection/packages",
     "postinstall": "node ./ng-add-pug-loader.js"
   },
   "private": true,
@@ -23,7 +22,7 @@
     "@angular/platform-browser": "~8.2.9",
     "@angular/platform-browser-dynamic": "~8.2.9",
     "@angular/router": "~8.2.9",
-    "@jo/modal": "file:projects/nasa-collection/packages/lib-modal-0.0.1.tgz",
+    "@jo/modal": "file:projects/nasa-collection/packages/jo-modal-0.0.1.tgz",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

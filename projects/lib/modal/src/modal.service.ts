@@ -1,5 +1,12 @@
-import { DOCUMENT } from '@angular/common';
-import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injectable, Injector, Type } from '@angular/core';
+import {
+  ApplicationRef,
+  ComponentFactoryResolver,
+  ComponentRef,
+  EmbeddedViewRef,
+  Injectable,
+  Injector,
+  Type
+} from '@angular/core';
 import { ModalConfig } from './modal-config';
 import { ModalRef } from './modal-ref';
 import { ModalComponent } from './modal.component';
@@ -8,59 +15,73 @@ import { ModalModule } from './modal.module';
 
 @Injectable({ providedIn: ModalModule })
 export class ModalService {
-  public innerModalRef: ComponentRef<ModalComponent>;
+  private _modalComponentRef: ComponentRef<ModalComponent>;
 
   public constructor(
-    @Inject(DOCUMENT) private document: Document,
     private factoryResolver: ComponentFactoryResolver,
     private appRef: ApplicationRef,
     private injector: Injector
   ) {}
 
-  public open(component: Type<any>, config: ModalConfig): ModalRef {
+  public open(component: Type<unknown>, config: ModalConfig): ModalRef {
     window.scrollTo(0, 0);
 
-    const dialogRef = this.appendModal(config);
+    const modalRef = this.appendModal(config);
 
-    this.innerModalRef.instance.childComponentType = component;
-    this.innerModalRef.instance.title = config.title;
-    this.innerModalRef.instance.data = config.data;
+    this._modalComponentRef.instance.childComponentType = component;
+    this._modalComponentRef.instance.title = config.title;
+    this._modalComponentRef.instance.data = config.data;
 
-    return dialogRef;
+    return modalRef;
   }
 
   private appendModal(config: ModalConfig): ModalRef {
-    // Setup injectable dependencies
-    const map = new WeakMap();
-    map.set(ModalConfig, config);
-    const dialogRef = new ModalRef();
-    map.set(ModalRef, dialogRef);
+    const modalRef = new ModalRef();
+    const dependencies = setupAdditionalDependencies(config, modalRef);
+    this._modalComponentRef = this.createComponentRef(dependencies);
 
-    // Render dialog
+    this.render(this._modalComponentRef);
+    this.setupOnCloseHandler(this._modalComponentRef.instance, modalRef);
+
+    return modalRef;
+  }
+
+  private createComponentRef(additionalDependencies: WeakMap<any, any>): ComponentRef<ModalComponent> {
     const componentFactory = this.factoryResolver.resolveComponentFactory(ModalComponent);
-    const componentRef = componentFactory.create(new ModalInjector(this.injector, map));
 
-    this.appRef.attachView(componentRef.hostView);
+    return componentFactory.create(new ModalInjector(this.injector, additionalDependencies));
+  }
 
-    const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-    this.document.body.appendChild(domElem);
+  private render(componentRef: ComponentRef<ModalComponent>): void {
+    const hostView = componentRef.hostView;
+    const htmlElement = (hostView as EmbeddedViewRef<ModalComponent>).rootNodes[0] as HTMLElement;
 
-    this.innerModalRef = componentRef;
+    this.appRef.attachView(hostView);
+    document.body.appendChild(htmlElement);
+  }
 
+  private setupOnCloseHandler(instance: ModalComponent, modalRef: ModalRef): void {
     // Close from inner dialog
-    this.innerModalRef.instance.onClose.subscribe(() => this.removeModal());
+    instance.onClose$.subscribe(this.detachModal.bind(this));
 
     // Close from outside
-    const subscription = dialogRef.close$.subscribe(() => {
-      this.removeModal();
+    const subscription = modalRef.close$.subscribe(() => {
+      this.detachModal();
       subscription.unsubscribe();
     });
-
-    return dialogRef;
   }
 
-  private removeModal(): void {
-    this.appRef.detachView(this.innerModalRef.hostView);
-    this.innerModalRef.destroy();
+  private detachModal(): void {
+    this.appRef.detachView(this._modalComponentRef.hostView);
+    this._modalComponentRef.destroy();
   }
 }
+
+const setupAdditionalDependencies = (config: ModalConfig, modalRef: ModalRef): WeakMap<any, any> => {
+  const map = new WeakMap();
+
+  map.set(ModalConfig, config);
+  map.set(ModalRef, modalRef);
+
+  return map;
+};

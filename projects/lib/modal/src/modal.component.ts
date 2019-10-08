@@ -1,10 +1,11 @@
 import {
-  AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
   OnDestroy,
+  OnInit,
   Type,
   ViewChild,
   ViewContainerRef
@@ -13,12 +14,13 @@ import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'lib-modal',
-  templateUrl: './modal.component.pug',
-  styles: []
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalComponent implements AfterViewInit, OnDestroy {
-  private readonly onClose$ = new Subject<boolean>();
-  public childComponentRef: ComponentRef<any>;
+export class ModalComponent implements OnDestroy, OnInit {
+  private readonly _onClose$ = new Subject<unknown>();
+  public childComponentRef: ComponentRef<Component>;
   public childComponentType: Type<any>;
   public data: { [key: string]: any };
   public title: string;
@@ -26,19 +28,11 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   @ViewChild('body', { static: true, read: ViewContainerRef })
   private bodyContainer: ViewContainerRef;
 
-  get onClose(): Observable<boolean> {
-    return this.onClose$.asObservable();
+  get onClose$(): Observable<unknown> {
+    return this._onClose$.asObservable();
   }
 
-  public constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private detectorRef: ChangeDetectorRef
-  ) {}
-
-  public ngAfterViewInit(): void {
-    this.loadComponent(this.childComponentType);
-    this.detectorRef.detectChanges();
-  }
+  public constructor(private factoryResolver: ComponentFactoryResolver, private detectorRef: ChangeDetectorRef) {}
 
   public ngOnDestroy(): void {
     if (this.childComponentRef) {
@@ -47,19 +41,27 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  public onCloseDialog(): void {
-    this.onClose$.next(true);
+  public ngOnInit(): void {
+    this.loadComponent(this.childComponentType);
+    this.detectorRef.detectChanges();
   }
 
-  private loadComponent(component: Type<any>): void {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
+  private loadComponent(component: Type<Component>): void {
     this.bodyContainer.clear();
 
+    const componentFactory = this.factoryResolver.resolveComponentFactory(component);
     this.childComponentRef = this.bodyContainer.createComponent(componentFactory);
-    const instance = this.childComponentRef.instance;
 
     if (this.data) {
-      Object.keys(this.data).forEach(key => (instance[key] = this.data[key]));
+      this.attachData(this.childComponentRef.instance);
     }
+  }
+
+  private attachData(instance: Component): void {
+    Object.keys(this.data).forEach(key => (instance[key] = this.data[key]));
+  }
+
+  public onCloseModal(): void {
+    this._onClose$.next();
   }
 }
