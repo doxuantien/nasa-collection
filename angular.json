@@ -1,0 +1,208 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "nasa-collection": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "sass"
+        }
+      },
+      "root": "projects/nasa-collection",
+      "sourceRoot": "projects/nasa-collection/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/nasa-collection",
+            "index": "projects/nasa-collection/src/index.html",
+            "main": "projects/nasa-collection/src/main.ts",
+            "polyfills": "projects/nasa-collection/src/polyfills.ts",
+            "tsConfig": "projects/nasa-collection/tsconfig.app.json",
+            "aot": false,
+            "assets": ["projects/nasa-collection/src/assets"],
+            "styles": ["projects/nasa-collection/src/styles.sass"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/nasa-collection/src/environments/environment.ts",
+                  "with": "projects/nasa-collection/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "nasa-collection:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "nasa-collection:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "nasa-collection:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/nasa-collection/src/test.ts",
+            "polyfills": "projects/nasa-collection/src/polyfills.ts",
+            "tsConfig": "projects/nasa-collection/tsconfig.spec.json",
+            "karmaConfig": "projects/nasa-collection/karma.conf.js",
+            "assets": ["projects/nasa-collection/src/favicon.ico", "projects/nasa-collection/src/assets"],
+            "styles": ["projects/nasa-collection/src/styles.sass"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/nasa-collection/tsconfig.app.json",
+              "projects/nasa-collection/tsconfig.spec.json",
+              "projects/nasa-collection/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/nasa-collection/e2e/protractor.conf.js",
+            "devServerTarget": "nasa-collection:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "nasa-collection:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "lib-modal": {
+      "projectType": "library",
+      "root": "projects/lib/modal",
+      "sourceRoot": "projects/lib/modal/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/lib/modal/tsconfig.lib.json",
+            "project": "projects/lib/modal/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/lib/modal/src/test.ts",
+            "tsConfig": "projects/lib/modal/tsconfig.spec.json",
+            "karmaConfig": "projects/lib/modal/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["projects/lib/modal/tsconfig.lib.json", "projects/lib/modal/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "lib-button": {
+      "projectType": "library",
+      "root": "projects/lib/button",
+      "sourceRoot": "projects/lib/button/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/lib/button/tsconfig.lib.json",
+            "project": "projects/lib/button/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/lib/button/src/test.ts",
+            "tsConfig": "projects/lib/button/tsconfig.spec.json",
+            "karmaConfig": "projects/lib/button/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["projects/lib/button/tsconfig.lib.json", "projects/lib/button/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "lib-icon": {
+      "projectType": "library",
+      "root": "projects/lib/icon",
+      "sourceRoot": "projects/lib/icon/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/lib/icon/tsconfig.lib.json",
+            "project": "projects/lib/icon/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/lib/icon/src/test.ts",
+            "tsConfig": "projects/lib/icon/tsconfig.spec.json",
+            "karmaConfig": "projects/lib/icon/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["projects/lib/icon/tsconfig.lib.json", "projects/lib/icon/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "nasa-collection"
+}
