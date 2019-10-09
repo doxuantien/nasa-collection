@@ -1,0 +1,33 @@
+<div class="thumbnail" (click)="onOpenVideo()">
+  <div class="image">
+    <img src="{{ item.thumbnail }}" alt="{{ item.title }}" title="{{ item.title }}" />
+  </div>
+  <div class="action" *ngIf="item.mediaType === 'video'">
+    <div class="play"></div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="top-content">
+    <div class="location">{{ item.location || '' }}</div>
+    <div class="date">{{ item.date | formatDate }}</div>
+  </div>
+  <div class="title">{{ item.title }}</div>
+  <div class="description">{{ item.description }}</div>
+
+  <div class="flex-1"></div>
+
+  <ng-container *ngIf="itemType === 0">
+    <div class="actions">
+      .button.icon.favorite([class.active]="isFavorite", (click)="onClickFavorite()")
+      .button.icon.delete((click)="onClickDelete()") .button.icon.edit((click)="onClickEdit()")
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="itemType === 1">
+    <div class="button add-action" (click)="onAddItemToCollection()">
+      <div class="icon-plus"></div>
+      <div class="text">Add to NASA collection</div>
+    </div>
+  </ng-container>
+</div>

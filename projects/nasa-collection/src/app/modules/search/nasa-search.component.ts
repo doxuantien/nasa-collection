@@ -19,7 +19,7 @@ export class NasaSearchComponent implements OnInit {
   public readonly quantity$ = new Subject<number>();
   public readonly query$ = new Subject<string>();
 
-  @ViewChild(SearchComponent)
+  @ViewChild(SearchComponent, { static: true })
   private searchComponent: SearchComponent;
 
   public constructor(private searchService: SearchService, private converter: SearchResultsConverter) {}
@@ -27,7 +27,7 @@ export class NasaSearchComponent implements OnInit {
   public ngOnInit(): void {
     this.searchComponent.queryChanges
       .pipe(
-        filter(Boolean),
+        filter<string>(Boolean),
         filter(query => query.length >= 3),
         distinctUntilChanged(),
         debounceTime(300),

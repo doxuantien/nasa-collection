@@ -1,0 +1,16 @@
+<div class="row header">
+  <div class="col title">
+    <div class="text">NASA Collection</div>
+    <div class="button primary action" [routerLink]="'nasa-search'"></div>
+    <div class="icon-plus"></div>
+    <div class="content">Add new item</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="items">
+    <div class="item" *ngFor="let item of items$ | async; let i = index; trackBy: trackByNasaId">
+      <app-item [model]="item" [itemType]="0" (action)="onActionEmitted($event)"></app-item>
+    </div>
+  </div>
+</div>

@@ -9,8 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "pack:lib": "npm-run-all pack:lib:*",
-    "pack:lib:modal": "ng build lib-modal && cd dist/lib/modal && npm pack && cp jo-modal-0.0.1.tgz ../../../projects/nasa-collection/packages",
-    "postinstall": "node ./ng-add-pug-loader.js"
+    "pack:lib:modal": "ng build lib-modal && cd dist/lib/modal && npm pack && cp jo-modal-0.0.1.tgz ../../../projects/nasa-collection/packages"
   },
   "private": true,
   "dependencies": {

@@ -1,8 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { CollectionService } from '@core/services/collection.service';
 import { VideoPlayerService } from '@core/services/video-player.service';
-import { DialogConfig } from '@modules/dialog/dialog-config';
-import { DialogService } from '@modules/dialog/dialog.service';
+import { ModalConfig, ModalService } from '@jo/modal';
 import { ItemFormComponent } from '@shared/components/item-form/item-form.component';
 import { ItemActionEnum } from '@shared/models/enums/item-action.enum';
 import { ItemModel } from '@shared/models/item.model';
@@ -10,7 +9,7 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.pug',
+  templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
@@ -20,7 +19,7 @@ export class HomeComponent implements OnInit {
   private containerClass = 'container';
 
   public constructor(
-    private dialogService: DialogService,
+    private dialogService: ModalService,
     private collectionService: CollectionService,
     private videoPlayerService: VideoPlayerService
   ) {}
@@ -60,7 +59,7 @@ export class HomeComponent implements OnInit {
 
   private openDialog(item: ItemModel): void {
     const data = { item, action: 'edit' };
-    const config = new DialogConfig('Edit', data);
+    const config = new ModalConfig('Edit', data);
 
     this.dialogService.open(ItemFormComponent, config);
   }

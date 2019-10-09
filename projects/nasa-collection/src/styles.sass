@@ -1,1 +1,76 @@
-/* You can add global styles to this file, and also import other style files */
+@import "app/styles/variables"
+
+body, html
+  overflow-x: hidden
+
+html
+  font-family: sans-serif
+  line-height: 1.15
+  box-sizing: border-box
+  -ms-text-size-adjust: 100%
+  -webkit-text-size-adjust: 100%
+
+body
+  margin: 0
+
+*,
+*::before,
+*::after
+  box-sizing: inherit
+
+*, *:focus
+  outline: none
+
+ul
+  margin: 0
+  padding: 0
+  list-style: none
+
+a, a:focus, a:hover, a:active
+  color: black
+  text-decoration: none
+
+button
+  &:focus
+    box-shadow: none
+
+input, textarea, select
+  font-family: inherit
+  margin: 0
+  border: none
+  box-shadow: none
+  outline: none
+  color: black
+
+  &::placeholder
+    color: $inactive-color
+
+  &::-ms-clear
+    display: none
+
+select
+  background: url('/assets/down.svg') right / contain no-repeat
+  -webkit-appearance: none
+
+p
+  margin: 0 0 5px
+
+.container
+  width: 100%
+  padding-right: 15px
+  padding-left: 15px
+  margin-right: auto
+  margin-left: auto
+
+.row
+  display: flex
+  flex-wrap: wrap
+  margin-right: -15px
+  margin-left: -15px
+
+.col
+  position: relative
+  width: 100%
+  min-height: 1px
+  padding-right: 15px
+  padding-left: 15px

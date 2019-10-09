@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CollectionService } from '@core/services/collection.service';
-import { DialogRef } from '@modules/dialog/dialog-ref';
+import { ModalRef } from '@jo/modal';
 import { ItemModel } from '../../models/item.model';
 
 type Action = 'edit' | 'add';
@@ -41,7 +41,7 @@ export class ItemFormComponent {
   public constructor(
     private formBuilder: FormBuilder,
     private collectionService: CollectionService,
-    private dialogRef: DialogRef
+    private dialogRef: ModalRef
   ) {}
 
   public onClickAction(): void {

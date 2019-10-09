@@ -25,6 +25,9 @@
             "aot": false,
             "assets": ["projects/nasa-collection/src/assets"],
             "styles": ["projects/nasa-collection/src/styles.sass"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/assets/styles"]
+            },
             "scripts": []
           },
           "configurations": {

@@ -2,7 +2,14 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "@environments/*": ["./projects/nasa-collection/src/environments/*"],
+      "@core/*": ["./projects/nasa-collection/src/app/core/*"],
+      "@shared/*": ["./projects/nasa-collection/src/app/shared/*"],
+      "@pages/*": ["./projects/nasa-collection/src/app/pages/*"],
+      "@modules/*": ["./projects/nasa-collection/src/app/modules/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableIvy": true

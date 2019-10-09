@@ -11,15 +11,13 @@ export class SearchService {
   public constructor(private searchApi: SearchApiService) {}
 
   public searchByQuery(query: string): Observable<SearchResponseModel<SearchItemModel>> {
-    const params = new HttpParams({ fromObject: { q: query } });
+    const params = new HttpParams({ fromObject: { q: query, media_type: 'video' } });
 
-    return this.searchApi
-      .search(params)
-      .pipe(
-        map(response => ({
-          total: response.collection.metadata.total_hits,
-          items: response.collection.items.slice(0, 20)
-        }))
-      );
+    return this.searchApi.search(params).pipe(
+      map(response => ({
+        total: response.collection.metadata.total_hits,
+        items: response.collection.items.slice(0, 20)
+      }))
+    );
   }
 }

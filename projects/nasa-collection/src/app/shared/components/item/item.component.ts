@@ -6,7 +6,7 @@ import { ItemModel } from '../../models/item.model';
 
 @Component({
   selector: 'app-item',
-  templateUrl: './item.component.pug',
+  templateUrl: './item.component.html',
   styleUrls: ['./item.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -22,7 +22,7 @@ export class ItemComponent {
 
   @Output() public action = new EventEmitter<ItemEventModel>();
 
-  public onClickFavorite() {
+  public onClickFavorite(): void {
     this.isFavorite = !this.isFavorite;
     this.action.emit({ action: ItemActionEnum.TOGGLE_FAVORITE, item: this.item });
   }

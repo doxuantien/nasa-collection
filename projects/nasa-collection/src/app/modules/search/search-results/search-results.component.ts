@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { AssetService } from '@core/services/asset.service';
 import { CollectionService } from '@core/services/collection.service';
 import { VideoPlayerService } from '@core/services/video-player.service';
-import { DialogConfig } from '@modules/dialog/dialog-config';
-import { DialogService } from '@modules/dialog/dialog.service';
+import { ModalConfig, ModalService } from '@jo/modal';
 import { ItemFormComponent } from '@shared/components/item-form/item-form.component';
 import { ItemActionEnum } from '@shared/models/enums/item-action.enum';
 import { ItemModel } from '@shared/models/item.model';
@@ -22,7 +21,7 @@ export class SearchResultsComponent {
 
   public constructor(
     private assetService: AssetService,
-    private dialogService: DialogService,
+    private dialogService: ModalService,
     private collectionService: CollectionService,
     private videoPlayerService: VideoPlayerService
   ) {}
@@ -44,16 +43,14 @@ export class SearchResultsComponent {
     this.getAssetLink(item).subscribe(href => {
       item.asset = href;
       const data = { item, action: 'add' };
-      const config = new DialogConfig('Add to collection', data);
+      const config = new ModalConfig('Add to collection', data);
 
       this.dialogService.open(ItemFormComponent, config);
     });
   }
 
   private openVideo(item: ItemModel): void {
-    this.getAssetLink(item).subscribe(href =>
-      this.videoPlayerService.openVideo({ title: item.title, source: href })
-    );
+    this.getAssetLink(item).subscribe(href => this.videoPlayerService.openVideo({ title: item.title, source: href }));
   }
 
   private getAssetLink(item: ItemModel): Observable<string> {
