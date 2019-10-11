@@ -8,7 +8,7 @@ type Action = 'edit' | 'add';
 
 @Component({
   selector: 'app-item-form',
-  templateUrl: './item-form.component.pug',
+  templateUrl: './item-form.component.html',
   styleUrls: ['./item-form.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

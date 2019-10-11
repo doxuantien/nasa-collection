@@ -6,7 +6,7 @@ import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-video-player',
-  templateUrl: './video-player.component.pug',
+  templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.sass']
 })
 export class VideoPlayerComponent implements OnInit {

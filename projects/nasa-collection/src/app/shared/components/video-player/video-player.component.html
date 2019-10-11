@@ -1,0 +1,12 @@
+<div class="fade" [class.show]="isOpen$ | async" (click)="onCloseVideo()"></div>
+
+<div class="box" [class.show]="isOpen$ | async">
+  <div class="title">
+    <div class="text">{{ (video$ | async)?.title | titlecase }}</div>
+    <div class="close" (click)="onCloseVideo()"></div>
+  </div>
+
+  <video autoplay muted controls *ngIf="isOpen$ | async">
+    <source [src]="(video$ | async).source" />
+  </video>
+</div>

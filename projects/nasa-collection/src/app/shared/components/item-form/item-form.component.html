@@ -1,0 +1,38 @@
+<div class="form-group">
+  <form [formGroup]="formGroup">
+    <ng-container *ngFor="let control of controls">
+      <ng-container
+        *ngTemplateOutlet="controlTmp; context: { $implicit: control.id, type: control.type, label: control.label }"
+      ></ng-container>
+    </ng-container>
+  </form>
+</div>
+
+<div class="actions">
+  <div class="button primary" (click)="onClickAction()">
+    <div class="icon-check"></div>
+    <div class="content">{{ action === 'edit' ? 'Save' : 'Add to collection' }}</div>
+  </div>
+</div>
+
+<ng-template #controlTmp let-type let-id="id" let-label="label">
+  <div class="control-group">
+    <label
+      [for]="id"
+      [class.has-value]="formGroup.get(id).value"
+      [class.hidden]="!formGroup.get(id).value"
+      [class.required]="formGroup.get(id).validator"
+    ></label>
+    <input *ngIf="!type" type="text" [id]="id" [placeholder]="id | titlecase" [formControlName]="id" />
+    <textarea
+      *ngIf="type === 'textarea'"
+      [id]="id"
+      [placeholder]="id | titlecase"
+      [formControlName]="id"
+      rows="5"
+    ></textarea>
+    <select *ngIf="type === 'dropdown'" [id]="id" [formControlName]="id">
+      <option *ngFor="let type of mediaTypes" [value]="type">{{ type | titlecase }}</option>
+    </select>
+  </div>
+</ng-template>

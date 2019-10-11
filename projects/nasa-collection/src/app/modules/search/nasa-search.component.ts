@@ -11,7 +11,7 @@ import { SearchResultsConverter } from './search-results.converter';
 
 @Component({
   selector: 'app-search-page',
-  templateUrl: './nasa-search.component.pug',
+  templateUrl: './nasa-search.component.html',
   styleUrls: ['./nasa-search.component.sass']
 })
 export class NasaSearchComponent implements OnInit {

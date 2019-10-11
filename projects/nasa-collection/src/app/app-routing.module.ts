@@ -4,7 +4,7 @@ import { HomeComponent } from '@pages/home/home.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'nasa-search', loadChildren: './modules/search/search.module#SearchModule' }
+  { path: 'nasa-search', loadChildren: () => import('./modules/search/search.module').then(m => m.SearchModule) }
 ];
 
 @NgModule({

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col header">
+      <a class="back" [routerLink]="''">
+        <span class="icon"></span>
+        <span class="text">Back to collection</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col content">
+      <div class="text">Search from Nasa</div>
+      <div class="input">
+        <app-search></app-search>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col results">
+      <app-search-results
+        [query]="query$ | async"
+        [quantity]="quantity$ | async"
+        [items]="items$ | async"
+      ></app-search-results>
+    </div>
+  </div>
+</div>
