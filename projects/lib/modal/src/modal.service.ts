@@ -7,11 +7,11 @@ import {
   Injector,
   Type
 } from '@angular/core';
-import { ModalConfig } from './modal-config';
-import { ModalRef } from './modal-ref';
 import { ModalComponent } from './modal.component';
-import { ModalInjector } from './modal.injector';
 import { ModalModule } from './modal.module';
+import { ModalConfig } from './models/modal-config';
+import { ModalRef } from './models/modal-ref';
+import { ModalInjector } from './models/modal.injector';
 
 @Injectable({ providedIn: ModalModule })
 export class ModalService {
@@ -27,10 +27,11 @@ export class ModalService {
     window.scrollTo(0, 0);
 
     const modalRef = this.appendModal(config);
+    const instance = this._modalComponentRef.instance;
 
-    this._modalComponentRef.instance.childComponentType = component;
-    this._modalComponentRef.instance.title = config.title;
-    this._modalComponentRef.instance.data = config.data;
+    instance.childComponentType = component;
+    instance.title = config.title;
+    instance.data = config.data;
 
     return modalRef;
   }

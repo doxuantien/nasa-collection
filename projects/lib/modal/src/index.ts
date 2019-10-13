@@ -1,4 +1,4 @@
 export * from './modal.service';
 export * from './modal.component';
-export * from './modal-config';
-export * from './modal-ref';
+export * from './models/modal-config';
+export * from './models/modal-ref';

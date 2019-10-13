@@ -21,8 +21,8 @@ import { Observable, Subject } from 'rxjs';
 export class ModalComponent implements OnDestroy, OnInit {
   private readonly _onClose$ = new Subject<unknown>();
   public childComponentRef: ComponentRef<Component>;
-  public childComponentType: Type<any>;
-  public data: { [key: string]: any };
+  public childComponentType: Type<unknown>;
+  public data: { [key: string]: unknown };
   public title: string;
 
   @ViewChild('body', { static: true, read: ViewContainerRef })
